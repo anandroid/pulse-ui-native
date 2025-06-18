@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "pulse-ui-native",
-    "slug": "pulse-ui-native",
+    "name": "Vybe Search",
+    "slug": "vybe-search",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

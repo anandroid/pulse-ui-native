@@ -42,6 +42,8 @@ function AppContent() {
       const savedTheme = await AsyncStorage.getItem(THEME_STORAGE_KEY);
       if (savedTheme && savedTheme in themes) {
         setTheme(savedTheme as ThemeMode);
+        // Update splash screen background for next launch
+        await AsyncStorage.setItem('splash-background-color', themes[savedTheme as ThemeMode].background);
       }
     } catch (error) {
       console.error('Error loading theme:', error);
@@ -94,6 +96,8 @@ function AppContent() {
       if (data.type === 'theme-change' && data.theme in themes) {
         setTheme(data.theme);
         AsyncStorage.setItem(THEME_STORAGE_KEY, data.theme);
+        // Update splash screen background for next launch
+        AsyncStorage.setItem('splash-background-color', themes[data.theme].background);
       } else if (data.type === 'external-link') {
         setExternalUrl(data.url);
       } else if (data.type === 'get-push-token') {
@@ -122,7 +126,14 @@ function AppContent() {
       
       // Check theme on load and when storage changes
       checkTheme();
-      window.addEventListener('storage', checkTheme);
+      window.addEventListener('storage', function(e) {
+        if (e.key === '${THEME_STORAGE_KEY}') {
+          checkTheme();
+        }
+      });
+      
+      // Also check periodically in case storage event doesn't fire
+      setInterval(checkTheme, 1000);
       
       // Override window.open to handle external links
       const originalOpen = window.open;
