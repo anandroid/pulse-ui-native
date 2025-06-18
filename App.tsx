@@ -186,6 +186,8 @@ export default function App() {
         backgroundColor={themeColors.statusBarBackground}
       />
       
+      <View style={[styles.topSpace, { backgroundColor: themeColors.background }]} />
+      
       <WebView
         ref={mainWebViewRef}
         source={{ uri: MAIN_URL }}
@@ -300,5 +302,8 @@ const styles = StyleSheet.create({
   },
   webFallbackSubtext: {
     fontSize: 16,
+  },
+  topSpace: {
+    height: 80,
   },
 });
