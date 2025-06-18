@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { StyleSheet, View, StatusBar, Modal, TouchableOpacity, Text, SafeAreaView, Alert, Platform, ActivityIndicator } from 'react-native';
 import { WebView } from 'react-native-webview';
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
@@ -18,13 +19,14 @@ Notifications.setNotificationHandler({
   }),
 });
 
-export default function App() {
+function AppContent() {
   const [theme, setTheme] = useState<ThemeMode>(DEFAULT_THEME);
   const [themeColors, setThemeColors] = useState<ThemeColors>(themes[DEFAULT_THEME]);
   const [externalUrl, setExternalUrl] = useState<string | null>(null);
   const mainWebViewRef = useRef<WebView>(null);
   const [pushToken, setPushToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const insets = useSafeAreaInsets();
 
   useEffect(() => {
     loadTheme();
@@ -186,7 +188,7 @@ export default function App() {
         backgroundColor={themeColors.statusBarBackground}
       />
       
-      <View style={[styles.topSpace, { backgroundColor: themeColors.background }]} />
+      <View style={[styles.topSpace, { backgroundColor: themeColors.background, height: insets.top }]} />
       
       <WebView
         ref={mainWebViewRef}
@@ -304,6 +306,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   topSpace: {
-    height: 80,
+    // Height will be set dynamically based on safe area insets
   },
 });
+
+export default function App() {
+  return (
+    <SafeAreaProvider>
+      <AppContent />
+    </SafeAreaProvider>
+  );
+}
