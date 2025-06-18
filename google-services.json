@@ -1,14 +1,14 @@
 {
   "project_info": {
-    "project_number": "YOUR_PROJECT_NUMBER",
-    "firebase_url": "YOUR_FIREBASE_URL",
-    "project_id": "YOUR_PROJECT_ID",
-    "storage_bucket": "YOUR_STORAGE_BUCKET"
+    "project_number": "269146618053",
+    "firebase_url": "https://api-project-269146618053.firebaseio.com",
+    "project_id": "api-project-269146618053",
+    "storage_bucket": "api-project-269146618053.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "YOUR_ANDROID_APP_ID",
+        "mobilesdk_app_id": "1:269146618053:android:da178e48e8e7256eb598ac",
         "android_client_info": {
           "package_name": "vybe.search.app"
         }
@@ -16,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "YOUR_API_KEY"
+          "current_key": "AIzaSyCVeueAr4gP7kcPAFYMQBoQEkAGV_hGLdc"
         }
       ],
       "services": {

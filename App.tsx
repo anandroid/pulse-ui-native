@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { StyleSheet, View, StatusBar, Modal, TouchableOpacity, Text, SafeAreaView, Alert, Platform } from 'react-native';
+import { StyleSheet, View, StatusBar, Modal, TouchableOpacity, Text, SafeAreaView, Alert, Platform, ActivityIndicator } from 'react-native';
 import { WebView } from 'react-native-webview';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
@@ -24,6 +24,7 @@ export default function App() {
   const [externalUrl, setExternalUrl] = useState<string | null>(null);
   const mainWebViewRef = useRef<WebView>(null);
   const [pushToken, setPushToken] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     loadTheme();
@@ -65,7 +66,9 @@ export default function App() {
         return;
       }
       
-      const token = (await Notifications.getExpoPushTokenAsync()).data;
+      const token = (await Notifications.getExpoPushTokenAsync({
+        projectId: 'api-project-269146618053',
+      })).data;
       console.log('Push token:', token);
       setPushToken(token);
       
@@ -162,6 +165,20 @@ export default function App() {
     })();
   `;
 
+  // Show a fallback on web platform since WebView doesn't work on web
+  if (Platform.OS === 'web') {
+    return (
+      <View style={[styles.container, styles.webFallback, { backgroundColor: themeColors.background }]}>
+        <Text style={[styles.webFallbackText, { color: themeColors.foreground }]}>
+          WebView is not supported on web platform.
+        </Text>
+        <Text style={[styles.webFallbackSubtext, { color: themeColors.foreground }]}>
+          Please run this app on iOS or Android.
+        </Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar
@@ -183,6 +200,28 @@ export default function App() {
         mixedContentMode={'compatibility'}
         allowsInlineMediaPlayback={true}
         mediaPlaybackRequiresUserAction={false}
+        onError={(syntheticEvent) => {
+          const { nativeEvent } = syntheticEvent;
+          console.error('WebView error:', nativeEvent);
+        }}
+        onHttpError={(syntheticEvent) => {
+          const { nativeEvent } = syntheticEvent;
+          console.error('WebView HTTP error:', nativeEvent);
+        }}
+        onLoadStart={() => {
+          console.log('WebView loading started');
+          setIsLoading(true);
+        }}
+        onLoadEnd={() => {
+          console.log('WebView loading ended');
+          setIsLoading(false);
+        }}
+        renderLoading={() => (
+          <View style={[styles.loadingContainer, { backgroundColor: themeColors.background }]}>
+            <ActivityIndicator size="large" color={themeColors.primary} />
+            <Text style={[styles.loadingText, { color: themeColors.foreground }]}>Loading TampaVibes...</Text>
+          </View>
+        )}
       />
       
       <Modal
@@ -240,5 +279,26 @@ const styles = StyleSheet.create({
   closeButtonText: {
     fontSize: 24,
     fontWeight: 'bold',
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingText: {
+    marginTop: 10,
+    fontSize: 16,
+  },
+  webFallback: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  webFallbackText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  webFallbackSubtext: {
+    fontSize: 16,
   },
 });
