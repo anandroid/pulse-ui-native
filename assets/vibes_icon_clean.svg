@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <!-- Magic Button Gradient -->
+    <linearGradient id="magicGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="hsl(270, 70%, 60%)" />
+      <stop offset="20%" stop-color="hsl(330, 80%, 70%)" />
+      <stop offset="100%" stop-color="hsl(190, 70%, 65%)" />
+    </linearGradient>
+    
+    <!-- Subtle inner glow -->
+    <radialGradient id="innerGlow" cx="30%" cy="30%">
+      <stop offset="0%" stop-color="hsl(0, 0%, 100%)" stop-opacity="0.3"/>
+      <stop offset="70%" stop-color="hsl(0, 0%, 100%)" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="hsl(0, 0%, 100%)" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  
+  <!-- App Icon Background - full size without rounded corners -->
+  <rect x="0" y="0" width="1024" height="1024" 
+        fill="url(#magicGradient)"/>
+  
+  <!-- Inner glow overlay -->
+  <rect x="0" y="0" width="1024" height="1024" 
+        fill="url(#innerGlow)"/>
+  
+  <!-- Location Pin and Sparkle -->
+  <g transform="translate(512, 512)">
+    <!-- Classic location pin shape - LARGER -->
+    <path d="M 0,280 C 0,280 -160,30 -160,-100 C -160,-200 -88,-280 0,-280 C 88,-280 160,-200 160,-100 C 160,30 0,280 0,280 Z" 
+          fill="hsl(0, 0%, 100%)" 
+          opacity="0.9"/>
+    
+    <!-- Small hole in location pin -->
+    <circle cx="0" cy="-100" r="25" fill="url(#magicGradient)" opacity="0.8"/>
+    
+    <!-- Golden ✨ sparkle positioned like a side crown - LARGER -->
+    <g transform="translate(130, -190) scale(7.5)">
+      <!-- Main large star -->
+      <polygon points="0,-10 2.5,-2.5 10,0 2.5,2.5 0,10 -2.5,2.5 -10,0 -2.5,-2.5" 
+               fill="hsl(45, 100%, 65%)" 
+               opacity="0.95"/>
+      
+      <!-- Upper right small star -->
+      <g transform="translate(7, -7)">
+        <polygon points="0,-4 1.5,-1.5 4,0 1.5,1.5 0,4 -1.5,1.5 -4,0 -1.5,-1.5" 
+                 fill="hsl(45, 100%, 70%)" 
+                 opacity="0.9"/>
+      </g>
+      
+      <!-- Lower left small star -->
+      <g transform="translate(-7, 7)">
+        <polygon points="0,-4 1.5,-1.5 4,0 1.5,1.5 0,4 -1.5,1.5 -4,0 -1.5,-1.5" 
+                 fill="hsl(45, 100%, 70%)" 
+                 opacity="0.9"/>
+      </g>
+      
+      <!-- Tiny dot -->
+      <circle cx="9" cy="5" r="1.5" fill="hsl(45, 100%, 75%)" opacity="0.8"/>
+    </g>
+    
+    <!-- Subtle glow around pin -->
+    <circle cx="0" cy="0" r="120" fill="hsl(0, 0%, 100%)" opacity="0.08"/>
+  </g>
+  
+  <!-- Top highlight -->
+  <rect x="0" y="0" width="1024" height="150" 
+        fill="url(#innerGlow)" 
+        opacity="0.4"/>
+</svg>
