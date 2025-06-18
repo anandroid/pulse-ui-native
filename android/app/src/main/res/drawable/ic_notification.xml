@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="#FFFFFF">
+    
+    <!-- Notification icon should be white/monochrome for visibility on colored backgrounds -->
+    <group android:translateX="12" android:translateY="12">
+        
+        <!-- Location pin shape (teardrop) - simplified for 24dp -->
+        <path android:pathData="M 0,8 C 0,8 -5,1 -5,-2 C -5,-5 -3,-7 0,-7 C 3,-7 5,-5 5,-2 C 5,1 0,8 0,8 Z"
+              android:fillColor="#FFFFFF" />
+        
+        <!-- Pin center dot -->
+        <path android:pathData="M0,-4 C1,-4 2,-3 2,-2 C2,-1 1,0 0,0 C-1,0 -2,-1 -2,-2 C-2,-3 -1,-4 0,-4 Z"
+              android:fillColor="#FFFFFF" />
+        
+        <!-- Single sparkle for notification -->
+        <group android:translateX="4" android:translateY="-4" android:scaleX="0.3" android:scaleY="0.3">
+            <path android:pathData="M0,-6 L1.5,-1.5 L6,0 L1.5,1.5 L0,6 L-1.5,1.5 L-6,0 L-1.5,-1.5 Z"
+                  android:fillColor="#FFFFFF" />
+        </group>
+        
+    </group>
+</vector>

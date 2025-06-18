@@ -3,4 +3,7 @@
   <color name="iconBackground">#ffffff</color>
   <color name="colorPrimary">#023c69</color>
   <color name="colorPrimaryDark">#ffffff</color>
+  <color name="gradient_start">#9966CC</color>
+  <color name="gradient_mid">#D980B8</color>
+  <color name="gradient_end">#5EAAB3</color>
 </resources>

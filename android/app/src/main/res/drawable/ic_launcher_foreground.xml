@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- Centered in 108dp canvas - scaled down version of your SVG -->
+    <group android:translateX="54" android:translateY="54">
+        
+        <!-- Location pin shape (teardrop) - scaled and simplified -->
+        <path android:pathData="M 0,18 C 0,18 -12,3 -12,-5 C -12,-12 -7,-17 0,-17 C 7,-17 12,-12 12,-5 C 12,3 0,18 0,18 Z"
+              android:fillColor="#FFFFFF"
+              android:strokeColor="#F8F8F8"
+              android:strokeWidth="2" />
+        
+        <!-- Pin center dot -->
+        <path android:pathData="M0,-9 C2.2,-9 4,-7.2 4,-5 C4,-2.8 2.2,-1 0,-1 C-2.2,-1 -4,-2.8 -4,-5 C-4,-7.2 -2.2,-9 0,-9 Z"
+              android:fillColor="#FFFFFF"
+              android:strokeColor="#F0F0F0"
+              android:strokeWidth="1.5" />
+        
+        <!-- Main sparkle on pin head -->
+        <group android:translateX="9" android:translateY="-10" android:scaleX="0.4" android:scaleY="0.4">
+            <path android:pathData="M0,-8 L2,-2 L8,0 L2,2 L0,8 L-2,2 L-8,0 L-2,-2 Z"
+                  android:fillColor="#FFD700" />
+        </group>
+        
+        <!-- Side sparkles -->
+        <group android:translateX="-13" android:translateY="-2" android:scaleX="0.25" android:scaleY="0.25">
+            <path android:pathData="M0,-6 L1.5,-1.5 L6,0 L1.5,1.5 L0,6 L-1.5,1.5 L-6,0 L-1.5,-1.5 Z"
+                  android:fillColor="#FFD700" />
+        </group>
+        
+        <group android:translateX="15" android:translateY="6" android:scaleX="0.22" android:scaleY="0.22">
+            <path android:pathData="M0,-6 L1.5,-1.5 L6,0 L1.5,1.5 L0,6 L-1.5,1.5 L-6,0 L-1.5,-1.5 Z"
+                  android:fillColor="#FFD700" />
+        </group>
+        
+        <!-- Small sparkle dots as circles using path -->
+        <path android:pathData="M-6,-16.8 C-5.56,-16.8 -5.2,-16.44 -5.2,-16 C-5.2,-15.56 -5.56,-15.2 -6,-15.2 C-6.44,-15.2 -6.8,-15.56 -6.8,-16 C-6.8,-16.44 -6.44,-16.8 -6,-16.8 Z"
+              android:fillColor="#FFD700" />
+        <path android:pathData="M11,-4.6 C11.33,-4.6 11.6,-4.33 11.6,-4 C11.6,-3.67 11.33,-3.4 11,-3.4 C10.67,-3.4 10.4,-3.67 10.4,-4 C10.4,-4.33 10.67,-4.6 11,-4.6 Z"
+              android:fillColor="#FFD700" />
+        <path android:pathData="M-11,7.5 C-10.72,7.5 -10.5,7.72 -10.5,8 C-10.5,8.28 -10.72,8.5 -11,8.5 C-11.28,8.5 -11.5,8.28 -11.5,8 C-11.5,7.72 -11.28,7.5 -11,7.5 Z"
+              android:fillColor="#FFD700" />
+        
+    </group>
+</vector>

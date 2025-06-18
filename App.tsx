@@ -182,10 +182,11 @@ function AppContent() {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: themeColors.background }]}>
       <StatusBar
         barStyle={themeColors.statusBarStyle}
-        backgroundColor={themeColors.statusBarBackground}
+        backgroundColor={themeColors.background}
+        translucent={false}
       />
       
       <View style={[styles.topSpace, { backgroundColor: themeColors.background, height: insets.top }]} />
