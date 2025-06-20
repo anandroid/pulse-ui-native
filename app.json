@@ -28,13 +28,21 @@
       "package": "vybe.search.app",
       "googleServicesFile": "./google-services.json",
       "edgeToEdgeEnabled": true,
-      "permissions": ["NOTIFICATIONS"]
+      "permissions": ["NOTIFICATIONS", "ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"]
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-notifications"
+      "expo-notifications",
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow Vybe Search to use your location to show relevant local content.",
+          "locationAlwaysPermission": "Allow Vybe Search to use your location to show relevant local content.",
+          "locationWhenInUsePermission": "Allow Vybe Search to use your location to show relevant local content."
+        }
+      ]
     ]
   }
 }
