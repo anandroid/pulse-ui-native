@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
 import { themes, DEFAULT_THEME, THEME_STORAGE_KEY, ThemeMode, ThemeColors } from './src/constants/themes';
+import { useLocationBridge } from './src/hooks/useLocationBridge';
 
 const MAIN_URL = 'https://tampavibes.app';
 
@@ -27,15 +28,24 @@ function AppContent() {
   const [pushToken, setPushToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const insets = useSafeAreaInsets();
+  const { locationData, requestLocation, sendLocationToWebView } = useLocationBridge();
 
   useEffect(() => {
     loadTheme();
     registerForPushNotifications();
-  }, []);
+    requestLocation();
+  }, [requestLocation]);
 
   useEffect(() => {
     setThemeColors(themes[theme]);
   }, [theme]);
+
+  useEffect(() => {
+    // Send location data to WebView when it's available
+    if (locationData) {
+      sendLocationToWebView(mainWebViewRef);
+    }
+  }, [locationData, sendLocationToWebView]);
 
   const loadTheme = async () => {
     try {
@@ -105,6 +115,17 @@ function AppContent() {
           type: 'push-token',
           token: pushToken,
         }));
+      } else if (data.type === 'request-location') {
+        // Request location and it will be sent automatically via useEffect
+        requestLocation();
+      } else if (data.type === 'get-location') {
+        // Send current location data if available
+        if (locationData) {
+          mainWebViewRef.current?.postMessage(JSON.stringify({
+            type: 'location-data',
+            data: locationData,
+          }));
+        }
       }
     } catch (error) {
       console.error('Error handling WebView message:', error);
@@ -173,6 +194,23 @@ function AppContent() {
           type: 'get-push-token'
         }));
       };
+      
+      // Expose location methods
+      window.requestLocation = () => {
+        window.ReactNativeWebView.postMessage(JSON.stringify({
+          type: 'request-location'
+        }));
+      };
+      
+      window.getLocation = () => {
+        window.ReactNativeWebView.postMessage(JSON.stringify({
+          type: 'get-location'
+        }));
+      };
+      
+      // Mark native bridge as available
+      window.isNativeBridge = true;
+      window.nativePlatform = '${Platform.OS}';
       
       true;
     })();
